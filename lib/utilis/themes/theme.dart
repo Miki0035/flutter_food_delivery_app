@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utilis/themes/custom_themes/app_bar_theme.dart';
+import 'package:food_delivery_app/utilis/themes/custom_themes/input_decoration_theme.dart';
 
 class FAppTheme {
   FAppTheme._();
@@ -10,5 +11,6 @@ class FAppTheme {
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: FAppBarTheme.lightAppBarTheme,
+    inputDecorationTheme: FInputDecorationTheme.lightInputDecorationTheme
   );
 }

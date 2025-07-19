@@ -23,6 +23,7 @@ class FImage {
   static const String salad = "assets/images/salad.png";
   static const String success = "assets/images/success.png";
   static const String tomatoes = "assets/images/tomatoes.png";
+  static const String loginGraphicTwo = "assets/images/login-graphic-two.png";
 
   //ICONS
   static const String arrowBack = "assets/icons/arrow-back.png";

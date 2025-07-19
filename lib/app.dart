@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/features/authentication/sign_up/screens/sign_up_screen.dart';
 import 'package:food_delivery_app/features/home/screens/home.dart';
 import 'package:food_delivery_app/utilis/themes/theme.dart';
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: FAppTheme.lightThemeData,
-      home: const HomeScreen(),
+      home: const SignUpScreen(),
     );
   }
 }
