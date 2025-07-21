@@ -1,5 +1,6 @@
 import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/bottom_navigation_bar.dart';
 import 'package:food_delivery_app/data/authentication_repository/auth_repository_provider.dart';
 import 'package:food_delivery_app/features/authentication/sign_up/screens/sign_up_screen.dart';
 import 'package:food_delivery_app/features/home/screens/home.dart';
@@ -16,29 +17,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: FAppTheme.lightThemeData,
-      home: FutureBuilder(
-        future: auth.getUser(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(color: FColor.orange),
-              ),
-            );
-          } else if (snapshot.hasError) {
-            print('FutureBuilder Error: ${snapshot.error}');
-            return const SignUpScreen();
-          } else {
-            final User? user = snapshot.data;
-            if (user != null) {
-              print('Signed in user $user');
-              return const HomeScreen();
-            } else {
-              return const SignUpScreen();
-            }
-          }
-        },
-      ),
+      home: const FBottomNavBar(),
+      // FutureBuilder(
+      //   future: auth.getUser(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      //       return Scaffold(
+      //         body: Center(
+      //           child: CircularProgressIndicator(color: FColor.orange),
+      //         ),
+      //       );
+      //     } else if (snapshot.hasError) {
+      //       print('FutureBuilder Error: ${snapshot.error}');
+      //       return const SignUpScreen();
+      //     } else {
+      //       final User? user = snapshot.data;
+      //       if (user != null) {
+      //         print('Signed in user $user');
+      //         return const FBottomNavBar();
+      //       } else {
+      //         return const SignUpScreen();
+      //       }
+      //     }
+      //   },
+      // ),
     );
   }
 }

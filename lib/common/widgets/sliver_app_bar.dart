@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/common/widgets/stacked_container_with_notification_count.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
@@ -62,46 +63,7 @@ class FSliverAppBar extends StatelessWidget {
               top: FSize.normalSpace,
               right: FSize.defaultSpace,
             ),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Container(
-                  width: FSize.iconXl,
-                  height: FSize.iconXl,
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                  child: Image.asset(
-                    FImage.bag,
-                    fit: BoxFit.contain,
-                    color: Colors.white,
-                  ),
-                ),
-                Positioned(
-                  top: -10,
-                  right: -5,
-                  child: Container(
-                    width: FSize.iconMd,
-                    height: FSize.iconMd,
-                    decoration: BoxDecoration(
-                      color: FColor.orange,
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-
-                    child: Text(
-                      '$notificationCount',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: FStackedContainerWithNotificationCount(notificationCount: notificationCount)
           ),
         ],
       ),
