@@ -10,9 +10,7 @@ class FNavigationBarTheme {
         labelPadding: EdgeInsets.all(FSize.normalSpace),
         backgroundColor: Colors.white,
         elevation: 2.0,
-        indicatorColor: FColor.orange,
-        indicatorShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16.0),
-        ),
+        indicatorColor: Colors.transparent,
+        indicatorShape: null,
       );
 }

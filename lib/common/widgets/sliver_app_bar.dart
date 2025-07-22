@@ -63,7 +63,12 @@ class FSliverAppBar extends StatelessWidget {
               top: FSize.normalSpace,
               right: FSize.defaultSpace,
             ),
-            child: FStackedContainerWithNotificationCount(notificationCount: notificationCount)
+            child: FStackedContainerWithNotificationCount(
+              notificationCount: notificationCount,
+              backgroundColor: Colors.black,
+              iconColor: Colors.white,
+              image: FImage.bag,
+            ),
           ),
         ],
       ),

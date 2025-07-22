@@ -16,7 +16,7 @@ class FHomeMenuItemContainer extends StatelessWidget {
         splashColor: Colors.redAccent.withValues(alpha: 0.8),
         child: Ink(
           width: 220,
-          height: 220,
+          height: 190,
 
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.0),

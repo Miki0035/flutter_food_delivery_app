@@ -10,7 +10,7 @@ class FAppTheme {
     useMaterial3: true,
     fontFamily: 'Quicksand',
     brightness: Brightness.light,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: Color(0xFFFAFAFA),
     appBarTheme: FAppBarTheme.lightAppBarTheme,
     inputDecorationTheme: FInputDecorationTheme.lightInputDecorationTheme,
     navigationBarTheme: FNavigationBarTheme.lightNavigationBarTheme,
