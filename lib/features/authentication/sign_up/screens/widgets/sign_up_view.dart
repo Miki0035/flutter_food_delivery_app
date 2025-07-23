@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/common/widgets/bottom_wave_clipper.dart';
-import 'package:food_delivery_app/common/widgets/text_button.dart';
+import 'package:food_delivery_app/common/widgets/buttons/text_button.dart';
 import 'package:food_delivery_app/features/authentication/login/screens/login_screen.dart';
 import 'package:food_delivery_app/features/authentication/sign_up/providers/sign_up_provider.dart';
 import 'package:food_delivery_app/features/authentication/sign_up/screens/widgets/popup_bottom_sheet_container.dart';

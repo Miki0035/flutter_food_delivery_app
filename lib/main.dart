@@ -1,12 +1,12 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/data/authentication_repository/auth_repository_provider.dart';
+import 'package:food_delivery_app/features/navigation/bottom_navigation_provider.dart';
 import 'package:food_delivery_app/utilis/constants/appwrite.dart';
 import 'package:provider/provider.dart';
 import 'app.dart';
 
 void main() {
-
   WidgetsFlutterBinding.ensureInitialized();
 
   final client =
@@ -20,6 +20,9 @@ void main() {
       providers: [
         ChangeNotifierProvider<AuthRepository>(
           create: (context) => AuthRepository(client),
+        ),
+        ChangeNotifierProvider<FBottomNavBarProvider>(
+          create: (context) => FBottomNavBarProvider(),
         ),
       ],
       child: const MyApp(),
