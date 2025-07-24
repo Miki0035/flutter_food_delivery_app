@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/data/models/HomeListItem.dart';
+import 'package:food_delivery_app/common/data/models/home_list_item_model.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
 
 class FHomeMenuItemContainer extends StatelessWidget {

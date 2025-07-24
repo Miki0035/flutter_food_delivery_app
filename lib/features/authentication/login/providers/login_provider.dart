@@ -6,7 +6,7 @@ class LoginProvider extends ChangeNotifier {
   final passwordTextController = TextEditingController();
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
-  bool obscureText = false;
+  bool obscureText = true;
   bool isLoading = false;
 
   void setObscureText() {

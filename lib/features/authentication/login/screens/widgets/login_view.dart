@@ -3,7 +3,7 @@ import 'package:food_delivery_app/common/widgets/bottom_wave_clipper.dart';
 import 'package:food_delivery_app/common/widgets/buttons/text_button.dart';
 import 'package:food_delivery_app/features/authentication/login/providers/login_provider.dart';
 import 'package:food_delivery_app/features/authentication/sign_up/screens/sign_up_screen.dart';
-import 'package:food_delivery_app/features/home/screens/home.dart';
+import 'package:food_delivery_app/features/navigation/bottom_navigation_bar.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
@@ -108,7 +108,7 @@ class LoginView extends StatelessWidget {
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => HomeScreen(),
+                                      builder: (context) => FBottomNavBar(),
                                     ),
                                     (route) => false,
                                   );

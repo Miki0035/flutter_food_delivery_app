@@ -5,6 +5,7 @@ import 'package:food_delivery_app/features/authentication/login/screens/login_sc
 import 'package:food_delivery_app/features/authentication/sign_up/providers/sign_up_provider.dart';
 import 'package:food_delivery_app/features/authentication/sign_up/screens/widgets/popup_bottom_sheet_container.dart';
 import 'package:food_delivery_app/features/home/screens/home.dart';
+import 'package:food_delivery_app/features/navigation/bottom_navigation_bar.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
@@ -90,6 +91,10 @@ class SignUpView extends StatelessWidget {
                                 validator:
                                     (value) => FValidator.validateEmail(value),
                                 cursorColor: FColor.orange,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: FSize.fontSizeMd,
+                                ),
                                 decoration: InputDecoration(
                                   labelText: "Email address",
                                 ),
@@ -106,6 +111,10 @@ class SignUpView extends StatelessWidget {
                                         FValidator.validatePassword(value),
                                 cursorColor: FColor.orange,
                                 obscureText: provider.obscureText,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: FSize.fontSizeMd,
+                                ),
                                 decoration: InputDecoration(
                                   labelText: "Password",
                                   suffixIcon: IconButton(
@@ -121,8 +130,8 @@ class SignUpView extends StatelessWidget {
                             SizedBox(height: FSize.defaultSpace),
                             FTextButton(
                               onPressed: () async {
-                                // final success = await provider.signUp();
-                                if (true && context.mounted) {
+                                final success = await provider.signUp();
+                                if (success && context.mounted) {
                                   showModalBottomSheet(
                                     context: context,
                                     builder:
@@ -133,7 +142,7 @@ class SignUpView extends StatelessWidget {
                                               MaterialPageRoute(
                                                 builder:
                                                     (context) =>
-                                                        const HomeScreen(),
+                                                        const FBottomNavBar(),
                                               ),
                                               (route) => false,
                                             );

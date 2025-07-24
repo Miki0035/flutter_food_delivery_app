@@ -1,4 +1,5 @@
-import 'package:food_delivery_app/common/data/models/HomeListItem.dart';
+import 'package:food_delivery_app/common/data/models/home_list_item_model.dart';
+import 'package:food_delivery_app/common/data/models/profile_list_tile_model.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 
@@ -32,5 +33,33 @@ final List<HomeListItem> homeListItems = [
     image: FImage.buritto,
     lowerTitle: FImage.arrowRight,
     backgroundColor: FColor.orange,
+  ),
+];
+
+final List<FProfileListTileModel> profileListTile = [
+  FProfileListTileModel(
+    label: "Full Name",
+    value: "Mikiyas Kebede",
+    icon: FImage.user,
+  ),
+  FProfileListTileModel(
+    label: "Email",
+    value: "mk@microsoft.com",
+    icon: FImage.envelope,
+  ),
+  FProfileListTileModel(
+    label: "Phone number",
+    value: "+1 555 123 4567",
+    icon: FImage.phone,
+  ),
+  FProfileListTileModel(
+    label: "Address 1 - (Home)",
+    value: "123 Mainstreet, NY",
+    icon: FImage.location,
+  ),
+  FProfileListTileModel(
+    label: "Address 2 - (Work)",
+    value: "123 Mainstreet, NY",
+    icon: FImage.location,
   ),
 ];

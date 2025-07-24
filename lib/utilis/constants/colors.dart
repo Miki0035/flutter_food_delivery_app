@@ -8,4 +8,6 @@ class FColor {
   static const Color darkRed = Color(0xFFD33B0D);
   static const Color red = Color(0xFFDF5A0C);
   static const Color darkGreen = Color(0xFF084137);
+  static const Color lightRed = Color(0xFFF14141);
+
 }

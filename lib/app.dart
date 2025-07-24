@@ -13,34 +13,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = context.read<AuthRepository>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: FAppTheme.lightThemeData,
-      home: const FBottomNavBar(),
-      // FutureBuilder(
-      //   future: auth.getUser(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.connectionState == ConnectionState.waiting) {
-      //       return Scaffold(
-      //         body: Center(
-      //           child: CircularProgressIndicator(color: FColor.orange),
-      //         ),
-      //       );
-      //     } else if (snapshot.hasError) {
-      //       print('FutureBuilder Error: ${snapshot.error}');
-      //       return const SignUpScreen();
-      //     } else {
-      //       final User? user = snapshot.data;
-      //       if (user != null) {
-      //         print('Signed in user $user');
-      //         return const FBottomNavBar();
-      //       } else {
-      //         return const SignUpScreen();
-      //       }
-      //     }
-      //   },
-      // ),
+      home: FutureBuilder<User?>(
+        future: context.read<AuthRepository>().getUser(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Scaffold(
+              body: const Center(
+                child: CircularProgressIndicator(color: FColor.orange),
+              ),
+            );
+          } else if (snapshot.hasError || snapshot.data == null) {
+            return const SignUpScreen();
+          } else {
+            return const FBottomNavBar();
+          }
+        },
+      ),
     );
   }
 }
