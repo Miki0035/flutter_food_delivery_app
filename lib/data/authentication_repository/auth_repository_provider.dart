@@ -7,17 +7,19 @@ import 'package:food_delivery_app/data/storage_repository/storage_repository.dar
 class AuthRepository extends ChangeNotifier {
   late final Account _account;
   late final DatabaseRepository _db;
-  late final StorageRepository _storage;
-  late final Avatars _avatar;
+
+  // late final StorageRepository _storage;
+  // late final Avatars _avatar;
 
   AuthRepository({
     required Client client,
     required DatabaseRepository databaseRepo,
     required StorageRepository storageRepo,
   }) : _account = Account(client),
-       _storage = storageRepo,
-       _db = databaseRepo,
-       _avatar = Avatars(client);
+       // _storage = storageRepo,
+       _db = databaseRepo;
+
+  // _avatar = Avatars(client);
 
   //implement login
   Future<User?> login({required String email, required String password}) async {
@@ -27,6 +29,10 @@ class AuthRepository extends ChangeNotifier {
         password: password,
       );
       final user = await getUser();
+      if (user == null) {
+        return null;
+      }
+      await _db.getUserDocument(user: user);
       return user;
     } catch (e) {
       print('AuthRepo error logging user: $e');
@@ -54,6 +60,7 @@ class AuthRepository extends ChangeNotifier {
         name: fullName,
         email: email,
         accountId: user.$id,
+
         // avatar: avatarUrl.toString(),
       );
       return user;

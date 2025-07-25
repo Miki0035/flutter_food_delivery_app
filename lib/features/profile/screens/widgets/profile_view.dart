@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/data/data.dart';
 import 'package:food_delivery_app/common/widgets/buttons/image_as_icon_button.dart';
 import 'package:food_delivery_app/common/widgets/sliver_app_bar.dart';
 import 'package:food_delivery_app/features/authentication/login/screens/login_screen.dart';
 import 'package:food_delivery_app/features/navigation/bottom_navigation_provider.dart';
 import 'package:food_delivery_app/features/profile/providers/profile_provider.dart';
-import 'package:food_delivery_app/features/profile/screens/widgets/image_as_icon_container.dart';
 import 'package:food_delivery_app/features/profile/screens/widgets/outlined_button.dart';
+import 'package:food_delivery_app/features/profile/screens/widgets/profile_form_row_image_form_text_field.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
+import 'package:food_delivery_app/utilis/validators/validator.dart';
 import 'package:provider/provider.dart';
 
 class ProfileView extends StatelessWidget {
@@ -75,37 +75,86 @@ class ProfileView extends StatelessWidget {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12.0),
                         ),
-                        child: ListView.separated(
-                          padding: EdgeInsets.zero,
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          separatorBuilder:
-                              (context, index) => SizedBox(height: 4.0),
-                          itemCount: profileListTile.length,
-                          itemBuilder:
-                              (_, index) => ListTile(
-                                leading: FImageAsIconContainer(
-                                  image: profileListTile[index].icon,
-                                ),
-                                title: Text(
-                                  profileListTile[index].label,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: FSize.fontSizeMd,
-                                  ),
-                                ),
-                                subtitle: Text(
-                                  profileListTile[index].value,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: FSize.fontSizeLg,
-                                  ),
-                                ),
+                        child: Form(
+                          key: provider.profileEditForm,
+                          child: Column(
+                            children: [
+                              //FULL NAME
+                              FProfileRowIconTextFormField(
+                                image: provider.profileListTile[0].icon,
+                                label: provider.profileListTile[0].label,
+                                controller: provider.fullNameController,
+                                validator:
+                                    (value) => FValidator.validateEmptyText(
+                                      "Full name",
+                                      value,
+                                    ),
                               ),
+                              SizedBox(height: 4.0),
+                              FProfileRowIconTextFormField(
+                                image: provider.profileListTile[1].icon,
+                                label: provider.profileListTile[1].label,
+                                controller: provider.emailController,
+                                validator:
+                                    (value) => FValidator.validateEmail(value),
+                              ),
+                              SizedBox(height: 4.0),
+                              FProfileRowIconTextFormField(
+                                image: provider.profileListTile[2].icon,
+                                label: provider.profileListTile[2].label,
+                                controller: provider.phoneController,
+                              ),
+                              SizedBox(height: 4.0),
+                              FProfileRowIconTextFormField(
+                                image: provider.profileListTile[3].icon,
+                                label: provider.profileListTile[3].label,
+                                controller: provider.address1Controller,
+                              ),
+                              SizedBox(height: 4.0),
+                              FProfileRowIconTextFormField(
+                                image: provider.profileListTile[4].icon,
+                                label: provider.profileListTile[4].label,
+                                controller: provider.address2Controller,
+                              ),
+                              SizedBox(height: 4.0),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: FSize.defaultSpace * 1.5),
                       FOutlinedButton(
+                        onPressed: () async {
+                          final success = await provider.editProfile();
+                          if (success && context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Successfully updated profile out",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: FSize.fontSizeLg,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+                          } else if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Profile not updated, please try again",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: FSize.fontSizeLg,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                        },
                         widget: Text(
                           "Edit Profile",
                           style: TextStyle(
@@ -119,7 +168,7 @@ class ProfileView extends StatelessWidget {
                         ),
                         borderColor: FColor.orange,
                       ),
-                      SizedBox(height: FSize.normalSpace),
+                      SizedBox(height: FSize.defaultSpace),
                       FOutlinedButton(
                         onPressed: () async {
                           final result = await provider.logout();

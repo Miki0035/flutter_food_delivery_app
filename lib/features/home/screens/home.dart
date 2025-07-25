@@ -3,9 +3,11 @@ import 'package:food_delivery_app/common/data/data.dart';
 import 'package:food_delivery_app/common/widgets/appbar_tile_with_subtitle.dart';
 import 'package:food_delivery_app/common/widgets/sliver_app_bar.dart';
 import 'package:food_delivery_app/common/widgets/stacked_container_with_notification_count.dart';
+import 'package:food_delivery_app/data/database_repository/database_repository.dart';
 import 'package:food_delivery_app/features/home/screens/widgets/home_menu_item_container.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,10 +19,15 @@ class HomeScreen extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             FSliverAppBar(
-              title: FAppBarTitleWithSubtitle(
-                title: "Deliver to",
-                subtitle: "Addis Abeba, Ethiopia",
-                showDownArrow: true,
+              title: Consumer<DatabaseRepository>(
+                builder:
+                    (context, provider, child) => FAppBarTitleWithSubtitle(
+                      title: "Deliver to",
+                      subtitle:
+                          provider.dbUser.address1 ??
+                          "Please update your profile address ",
+                      showDownArrow: true,
+                    ),
               ),
               actions: [
                 Padding(
@@ -37,6 +44,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
+
             SliverPadding(
               padding: EdgeInsets.all(FSize.defaultSpace),
               sliver: SliverToBoxAdapter(

@@ -35,31 +35,3 @@ final List<HomeListItem> homeListItems = [
     backgroundColor: FColor.orange,
   ),
 ];
-
-final List<FProfileListTileModel> profileListTile = [
-  FProfileListTileModel(
-    label: "Full Name",
-    value: "Mikiyas Kebede",
-    icon: FImage.user,
-  ),
-  FProfileListTileModel(
-    label: "Email",
-    value: "mk@microsoft.com",
-    icon: FImage.envelope,
-  ),
-  FProfileListTileModel(
-    label: "Phone number",
-    value: "+1 555 123 4567",
-    icon: FImage.phone,
-  ),
-  FProfileListTileModel(
-    label: "Address 1 - (Home)",
-    value: "123 Mainstreet, NY",
-    icon: FImage.location,
-  ),
-  FProfileListTileModel(
-    label: "Address 2 - (Work)",
-    value: "123 Mainstreet, NY",
-    icon: FImage.location,
-  ),
-];

@@ -1,10 +1,15 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/common/data/models/user_document.dart';
 import 'package:food_delivery_app/utilis/constants/appwrite.dart';
 
 class DatabaseRepository extends ChangeNotifier {
   late final Databases _databases;
+  Document? _doc;
+  FUserDocument dbUser = FUserDocument.empty();
+
+  FUserDocument? get userDoc => dbUser;
 
   DatabaseRepository(Client client) : _databases = Databases(client);
 
@@ -14,17 +19,26 @@ class DatabaseRepository extends ChangeNotifier {
     required String accountId,
   }) async {
     try {
+      final newUser = FUserDocument(
+        name: name,
+        email: email,
+        accountId: accountId,
+      );
       final result = await _databases.createDocument(
         databaseId: AppWriteConfig.APPWRITE_DATABASE_ID,
         collectionId: AppWriteConfig.APPWRITE_USER_COLLECTION_ID,
         documentId: ID.unique(),
-        data: {"name": name, "email": email, "accountId": accountId},
+        data: newUser.toMap(),
       );
+      _doc = result;
+      dbUser = FUserDocument.fromMap(result.data);
       print('User created: $result');
       return true;
     } catch (e) {
       print('DatabaseRepo Error creating user document: $e');
       return false;
+    } finally {
+      notifyListeners();
     }
   }
 
@@ -32,29 +46,33 @@ class DatabaseRepository extends ChangeNotifier {
     required User user,
     required String name,
     required String email,
+    required String phoneNumber,
     required String addressOne,
     required String addressTwo,
   }) async {
     try {
-      final document = await getUserDocument(user: user);
-      if (document == null) {
-        return null;
-      }
+      final updatedUser = FUserDocument(
+        name: name,
+        email: email,
+        accountId: user.$id,
+        address1: addressOne,
+        address2: addressTwo,
+        phoneNumber: phoneNumber,
+      );
       final updated = await _databases.updateDocument(
         databaseId: AppWriteConfig.APPWRITE_DATABASE_ID,
         collectionId: AppWriteConfig.APPWRITE_USER_COLLECTION_ID,
-        documentId: document.$id,
-        data: {
-          "name": name,
-          "email": email,
-          "address_1": addressOne,
-          "address_2": addressTwo,
-        },
+        documentId: _doc!.$id,
+        data: updatedUser.toMap(),
       );
+      dbUser = FUserDocument.fromMap(updated.data);
+
       return updated;
     } catch (e) {
       print('DatabaseRepo update document error: $e');
       return null;
+    } finally {
+      notifyListeners();
     }
   }
 
@@ -63,15 +81,19 @@ class DatabaseRepository extends ChangeNotifier {
       final results = await _databases.listDocuments(
         databaseId: AppWriteConfig.APPWRITE_DATABASE_ID,
         collectionId: AppWriteConfig.APPWRITE_USER_COLLECTION_ID,
-        queries: [Query.equal('account', user.$id)],
+        queries: [Query.equal('accountId', user.$id)],
       );
       if (results.documents.isEmpty) {
         return null;
       }
+      _doc = results.documents.first;
+      dbUser = FUserDocument.fromMap(results.documents.first.data);
       return results.documents.first;
     } catch (e) {
       print('DatabaseRepo get document error: $e');
       return null;
+    } finally {
+      notifyListeners();
     }
   }
 }
