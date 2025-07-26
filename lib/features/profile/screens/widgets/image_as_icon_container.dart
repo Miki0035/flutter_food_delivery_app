@@ -4,8 +4,15 @@ import 'package:food_delivery_app/utilis/constants/sizes.dart';
 
 class FImageAsIconContainer extends StatelessWidget {
   final String image;
+  final Color backgroundColor;
+  final double imageSize;
 
-  const FImageAsIconContainer({super.key, required this.image});
+  const FImageAsIconContainer({
+    super.key,
+    required this.image,
+    this.backgroundColor = FColor.lightOrange,
+    this.imageSize = FSize.iconLg,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +22,13 @@ class FImageAsIconContainer extends StatelessWidget {
       padding: EdgeInsets.all(FSize.defaultSpace),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
-        color: FColor.lightOrange.withValues(alpha: 0.1),
+        color: backgroundColor.withValues(alpha: 0.1),
       ),
       child: Image.asset(
         image,
         color: FColor.orange,
-        width: FSize.iconLg,
-        height: FSize.iconLg,
+        width: imageSize,
+        height: imageSize,
       ),
     );
   }
