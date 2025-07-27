@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/common/widgets/appbar_tile_with_subtitle.dart';
 import 'package:food_delivery_app/common/widgets/sliver_app_bar.dart';
 import 'package:food_delivery_app/common/widgets/stacked_container_with_notification_count.dart';
-import 'package:food_delivery_app/features/profile/screens/widgets/image_as_icon_container.dart';
 import 'package:food_delivery_app/features/search/providers/search_provider.dart';
+import 'package:food_delivery_app/features/search/screens/detail_screen.dart';
+import 'package:food_delivery_app/features/search/screens/widgets/grid_view_menu_item_container.dart';
 import 'package:food_delivery_app/features/search/screens/widgets/search_bar.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
@@ -97,95 +98,37 @@ class FSearchView extends StatelessWidget {
                                 ),
                           ),
                         ),
-                        SizedBox(height: FSize.defaultSpace * 1.4),
                       ],
                     ),
                   ),
                 ),
-
                 SliverPadding(
-                  padding: EdgeInsets.all(FSize.defaultSpace),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: FSize.defaultSpace,
+                    vertical: FSize.defaultSpace * 5,
+                  ),
                   sliver: SliverGrid.builder(
-                    itemCount: 5,
+                    itemCount: provider.menus.length,
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 250,
-                      mainAxisSpacing: MediaQuery.sizeOf(context).width / 12,
+                      mainAxisSpacing: MediaQuery.sizeOf(context).height / 12,
                       crossAxisSpacing: MediaQuery.sizeOf(context).width / 20,
                     ),
                     itemBuilder:
-                        (context, index) => Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.shade300,
-                                blurRadius: 10,
-                                offset: Offset(0, 5),
+                        (context, index) => FGridViewItemContainer(
+                          onTap: () {
+                            provider.setSelectedItem(index);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FDetailScreen(),
                               ),
-                            ],
-                          ),
-                          child: Stack(
-                            clipBehavior: Clip.none,
-
-                            children: [
-                              Positioned(
-                                top: -70,
-                                child: Hero(
-                                  tag: 1,
-                                  child: Image.asset(
-                                    FImage.burgerOne,
-                                    width: 150.0,
-                                    height: 150.0,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: FSize.defaultSpace,),
-                              Positioned(
-                                bottom: 0,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Wendy's Burger",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: FSize.fontSizeLg,
-                                      ),
-                                    ),
-                                    SizedBox(height: 4.0,),
-                                    Text(
-                                      "From \$10.4",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: FSize.fontSizeMd,
-                                      ),
-                                    ),
-                                    TextButton.icon(
-                                      onPressed: () {},
-                                      style: TextButton.styleFrom(
-                                        overlayColor: FColor.orange.withValues(alpha: 0.5),
-                                        splashFactory: InkRipple.splashFactory
-                                      ),
-                                      label: Text(
-                                        "Add to Cart",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          color: FColor.orange,
-                                        ),
-                                      ),
-                                      icon: FImageAsIconContainer(
-                                        image: FImage.plus,
-                                        imageSize: FSize.iconSm,
-                                        backgroundColor: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                            );
+                          },
+                          name: provider.menus[index].name,
+                          image: provider.menus[index].imageUrl,
+                          price: provider.menus[index].price,
+                          index: provider.menus[index].name,
                         ),
                   ),
                 ),

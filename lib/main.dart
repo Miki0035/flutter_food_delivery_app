@@ -5,6 +5,7 @@ import 'package:food_delivery_app/data/database_repository/database_repository.d
 import 'package:food_delivery_app/data/storage_repository/storage_repository.dart';
 import 'package:food_delivery_app/data/storage_repository/storage_repository.dart';
 import 'package:food_delivery_app/features/navigation/bottom_navigation_provider.dart';
+import 'package:food_delivery_app/features/search/providers/search_provider.dart';
 import 'package:food_delivery_app/utilis/constants/appwrite.dart';
 import 'package:provider/provider.dart';
 import 'app.dart';
@@ -37,6 +38,9 @@ void main() {
         ),
         ChangeNotifierProvider<FBottomNavBarProvider>(
           create: (context) => FBottomNavBarProvider(),
+        ),
+        ChangeNotifierProvider<FSearchProvider>(
+          create: (context) => FSearchProvider(),
         ),
       ],
       child: const MyApp(),

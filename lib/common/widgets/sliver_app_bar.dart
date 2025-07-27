@@ -5,6 +5,7 @@ import 'package:food_delivery_app/utilis/constants/sizes.dart';
 
 class FSliverAppBar extends StatelessWidget {
   final int notificationCount;
+  final bool showBackButton;
   final Widget? leading;
   final Widget? title;
   final List<Widget>? actions;
@@ -17,6 +18,7 @@ class FSliverAppBar extends StatelessWidget {
     this.actions,
     this.centerTitle = false,
     this.leading,
+    this.showBackButton = false,
   });
 
   @override
@@ -24,6 +26,7 @@ class FSliverAppBar extends StatelessWidget {
     return SliverPadding(
       padding: EdgeInsets.all(FSize.normalSpace),
       sliver: SliverAppBar(
+        automaticallyImplyLeading: showBackButton,
         leading: leading,
         title: title,
         actions: actions,

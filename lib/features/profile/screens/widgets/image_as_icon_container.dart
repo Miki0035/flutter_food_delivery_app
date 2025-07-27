@@ -17,19 +17,14 @@ class FImageAsIconContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 50.0,
-      height: 50.0,
+      width: imageSize,
+      height: imageSize,
       padding: EdgeInsets.all(FSize.defaultSpace),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
         color: backgroundColor.withValues(alpha: 0.1),
       ),
-      child: Image.asset(
-        image,
-        color: FColor.orange,
-        width: imageSize,
-        height: imageSize,
-      ),
+      child: Image.asset(image, color: FColor.orange, fit: BoxFit.contain),
     );
   }
 }
