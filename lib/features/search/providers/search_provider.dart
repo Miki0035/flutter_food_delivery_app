@@ -1,12 +1,82 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/common/data/models/menu_item_model.dart';
 import 'package:food_delivery_app/common/data/models/seach_menu_category_model.dart';
+import 'package:food_delivery_app/common/data/models/topping_option_model.dart';
+import 'package:food_delivery_app/utilis/constants/images.dart';
 
 class FSearchProvider extends ChangeNotifier {
   final controller = TextEditingController();
   late final List<FMenuItem> menus;
   int selectedIndex = 0;
   FMenuItem? selectedItem;
+
+  //TOPPINGS
+  final List<FToppingOptionModel> toppings = [
+    FToppingOptionModel(
+      image: FImage.tomatoes,
+      name: "Tomato",
+      type: CustomizationType.topping,
+    ),
+    FToppingOptionModel(
+      image: FImage.onionRings,
+      name: "Onions",
+      type: CustomizationType.topping,
+    ),
+    FToppingOptionModel(
+      image: FImage.cheese,
+      name: "Cheese",
+      type: CustomizationType.topping,
+    ),
+    FToppingOptionModel(
+      image: FImage.bacon,
+      name: "Bacon",
+      type: CustomizationType.topping,
+    ),
+    FToppingOptionModel(
+      image: FImage.pickles,
+      name: "Pickle",
+      type: CustomizationType.topping,
+    ),
+    FToppingOptionModel(
+      image: FImage.mushrooms,
+      name: "Mushroom",
+      type: CustomizationType.topping,
+    ),
+    FToppingOptionModel(
+      image: FImage.avocado,
+      name: "Avocado",
+      type: CustomizationType.topping,
+    ),
+  ];
+
+  final List<FToppingOptionModel> options = [
+    //OPTIONS
+    FToppingOptionModel(
+      image: FImage.fries,
+      name: "Fries",
+      type: CustomizationType.option,
+    ),
+    FToppingOptionModel(
+      image: FImage.coleslaw,
+      name: "Coleslaw",
+      type: CustomizationType.option,
+    ),
+    FToppingOptionModel(
+      image: FImage.salad,
+      name: "Salad",
+      type: CustomizationType.option,
+    ),
+    FToppingOptionModel(
+      image: FImage.pringles,
+      name: "Pringles",
+      type: CustomizationType.option,
+    ),
+    FToppingOptionModel(
+      image: FImage.mozz,
+      name: "Mozz",
+      type: CustomizationType.option,
+    ),
+  ];
 
   final List<FSearchMenuCategory> categories = [
     FSearchMenuCategory(name: "All", description: ""),
