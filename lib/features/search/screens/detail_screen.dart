@@ -210,7 +210,7 @@ class FDetailScreen extends StatelessWidget {
                       SizedBox(height: FSize.defaultSpace),
 
                       SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.14,
+                        height: MediaQuery.sizeOf(context).height * 0.16,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           separatorBuilder:
@@ -220,7 +220,7 @@ class FDetailScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final custom = provider.toppings[index];
                             return Container(
-                              width: MediaQuery.sizeOf(context).width * 0.28,
+                              width: MediaQuery.sizeOf(context).width * 0.35,
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
@@ -231,12 +231,12 @@ class FDetailScreen extends StatelessWidget {
                                 ],
                               ),
                               child: Stack(
+                                clipBehavior: Clip.none,
                                 children: [
                                   Positioned.fill(
                                     child: Container(
                                       width:
-                                          MediaQuery.sizeOf(context).width *
-                                          0.28,
+                                      MediaQuery.sizeOf(context).width * 0.35,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 4.0,
                                         vertical: FSize.normalSpace,
@@ -281,8 +281,7 @@ class FDetailScreen extends StatelessWidget {
                                     top: -1,
                                     child: Container(
                                       width:
-                                          MediaQuery.sizeOf(context).width *
-                                          0.28,
+                                      MediaQuery.sizeOf(context).width * 0.35,
                                       padding: EdgeInsets.all(
                                         FSize.normalSpace,
                                       ),
