@@ -3,6 +3,7 @@ import 'package:flutter_rating/flutter_rating.dart';
 import 'package:food_delivery_app/common/widgets/buttons/image_as_icon_button.dart';
 import 'package:food_delivery_app/common/widgets/buttons/image_button_container.dart';
 import 'package:food_delivery_app/common/widgets/sliver_app_bar.dart';
+import 'package:food_delivery_app/features/cart/providers/cart_provider.dart';
 import 'package:food_delivery_app/features/search/providers/search_provider.dart';
 import 'package:food_delivery_app/features/search/screens/widgets/calories_protein_column.dart';
 import 'package:food_delivery_app/features/search/screens/widgets/description_text.dart';
@@ -113,7 +114,7 @@ class FDetailScreen extends StatelessWidget {
                                     SizedBox(width: 12.0),
                                     FCalorieProteinColumn(
                                       title: "Protein",
-                                      value: item.protien,
+                                      value: item.protein,
                                       measurement: "g",
                                     ),
                                   ],
@@ -236,7 +237,8 @@ class FDetailScreen extends StatelessWidget {
                                   Positioned.fill(
                                     child: Container(
                                       width:
-                                      MediaQuery.sizeOf(context).width * 0.35,
+                                          MediaQuery.sizeOf(context).width *
+                                          0.35,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 4.0,
                                         vertical: FSize.normalSpace,
@@ -281,7 +283,8 @@ class FDetailScreen extends StatelessWidget {
                                     top: -1,
                                     child: Container(
                                       width:
-                                      MediaQuery.sizeOf(context).width * 0.35,
+                                          MediaQuery.sizeOf(context).width *
+                                          0.35,
                                       padding: EdgeInsets.all(
                                         FSize.normalSpace,
                                       ),
@@ -447,80 +450,86 @@ class FDetailScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                FImageButtonContainer(
-                                  image: FImage.minus,
-                                  size: 40.0,
-                                  imageSize: 20.0,
-                                  backgroundColor: FColor.orange.withValues(
-                                    alpha: 0.1,
+                        child: Consumer<FCartProvider>(
+                          builder:
+                              (context, provider, child) => Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  FPlusMinuTextRow(
+                                    plusTap: provider.increase,
+                                    minusTap: provider.decrease,
+                                    text: "${provider.quantity}",
                                   ),
-                                  imageColor: FColor.orange,
-                                  onTap: () {},
-                                ),
-                                SizedBox(width: FSize.normalSpace),
-                                Text(
-                                  "2",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: FSize.fontSizeLg,
-                                  ),
-                                ),
-                                SizedBox(width: FSize.normalSpace),
 
-                                FImageButtonContainer(
-                                  image: FImage.plus,
-                                  size: 40.0,
-                                  imageSize: 20.0,
-
-                                  backgroundColor: FColor.orange.withValues(
-                                    alpha: 0.1,
-                                  ),
-                                  imageColor: FColor.orange,
-                                  onTap: () {},
-                                ),
-                              ],
-                            ),
-
-                            // ADD TO CART BUTTON
-                            GestureDetector(
-                              onTap: () {},
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: FSize.normalSpace,
-                                  horizontal: FSize.defaultSpace,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: FColor.orange,
-                                  borderRadius: BorderRadius.circular(50.0),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Image.asset(
-                                      FImage.bag,
-                                      width: FSize.iconSm,
-                                      height: FSize.iconSm,
-                                      fit: BoxFit.contain,
-                                    ),
-                                    SizedBox(width: FSize.normalSpace),
-                                    Text(
-                                      "Add to cart (\$16)",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: FSize.fontSizeLg,
+                                  // ADD TO CART BUTTON
+                                  GestureDetector(
+                                    onTap:
+                                        () => provider.addItemToCart(
+                                          item,
+                                          provider.quantity,
+                                        ),
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: FSize.normalSpace,
+                                        horizontal: FSize.defaultSpace,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: FColor.orange,
+                                        borderRadius: BorderRadius.circular(
+                                          50.0,
+                                        ),
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          final success = provider
+                                              .addItemToCart(
+                                                item,
+                                                provider.quantity,
+                                              );
+                                          if (success && context.mounted) {
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  "Item added to cart",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: FSize.fontSizeLg,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                backgroundColor: Colors.green,
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Image.asset(
+                                              FImage.bag,
+                                              width: FSize.iconSm,
+                                              height: FSize.iconSm,
+                                              fit: BoxFit.contain,
+                                            ),
+                                            SizedBox(width: FSize.normalSpace),
+                                            Text(
+                                              "Add to cart (\$${(item.price * provider.quantity).toStringAsFixed(0)})",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: FSize.fontSizeLg,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
                         ),
                       ),
                     ],
@@ -531,6 +540,55 @@ class FDetailScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class FPlusMinuTextRow extends StatelessWidget {
+  final VoidCallback minusTap;
+  final VoidCallback plusTap;
+  final String text;
+
+  const FPlusMinuTextRow({
+    super.key,
+    required this.minusTap,
+    required this.plusTap,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        FImageButtonContainer(
+          image: FImage.minus,
+          size: 40.0,
+          imageSize: 20.0,
+          backgroundColor: FColor.orange.withValues(alpha: 0.1),
+          imageColor: FColor.orange,
+          onTap: minusTap,
+        ),
+        SizedBox(width: FSize.normalSpace),
+        Text(
+          text,
+          softWrap: true,
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: FSize.fontSizeLg,
+          ),
+        ),
+        SizedBox(width: FSize.normalSpace),
+
+        FImageButtonContainer(
+          image: FImage.plus,
+          size: 40.0,
+          imageSize: 20.0,
+
+          backgroundColor: FColor.orange.withValues(alpha: 0.1),
+          imageColor: FColor.orange,
+          onTap: plusTap,
+        ),
+      ],
     );
   }
 }

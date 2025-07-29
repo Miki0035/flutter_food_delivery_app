@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/features/navigation/bottom_navigation_bar.dart';
 import 'package:food_delivery_app/data/authentication_repository/auth_repository_provider.dart';
 import 'package:food_delivery_app/features/authentication/sign_up/screens/sign_up_screen.dart';
-import 'package:food_delivery_app/features/home/screens/home.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/themes/theme.dart';
 import 'package:provider/provider.dart';

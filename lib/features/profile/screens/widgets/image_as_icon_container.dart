@@ -5,8 +5,11 @@ import 'package:food_delivery_app/utilis/constants/sizes.dart';
 class FImageAsIconContainer extends StatelessWidget {
   final String image;
   final Color backgroundColor;
+  final Color imageColor;
   final double imageSize;
   final double containerSize;
+  final bool isNetworkImage;
+  final double borderRadius;
 
   const FImageAsIconContainer({
     super.key,
@@ -14,6 +17,9 @@ class FImageAsIconContainer extends StatelessWidget {
     this.backgroundColor = FColor.lightOrange,
     this.imageSize = FSize.iconLg,
     this.containerSize = 50.0,
+    this.isNetworkImage = false,
+    this.imageColor = FColor.orange,
+    this.borderRadius = 50.0,
   });
 
   @override
@@ -23,16 +29,24 @@ class FImageAsIconContainer extends StatelessWidget {
       height: containerSize,
       padding: EdgeInsets.all(FSize.defaultSpace),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50.0),
+        borderRadius: BorderRadius.circular(borderRadius),
         color: backgroundColor.withValues(alpha: 0.1),
       ),
-      child: Image.asset(
-        image,
-        color: FColor.orange,
-        fit: BoxFit.contain,
-        width: imageSize,
-        height: imageSize,
-      ),
+      child:
+          isNetworkImage
+              ? Image.network(
+                image,
+                fit: BoxFit.contain,
+                width: imageSize,
+                height: imageSize,
+              )
+              : Image.asset(
+                image,
+                color: imageColor,
+                fit: BoxFit.contain,
+                width: imageSize,
+                height: imageSize,
+              ),
     );
   }
 }

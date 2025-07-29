@@ -7,7 +7,7 @@ class FMenuItem {
   final double price;
   final double rating;
   final int calories;
-  final int protien;
+  final int protein;
   final FSearchMenuCategory category;
   final List<String> customizations;
 
@@ -18,7 +18,7 @@ class FMenuItem {
     required this.price,
     required this.rating,
     required this.calories,
-    required this.protien,
+    required this.protein,
     required this.category,
     required this.customizations,
   });

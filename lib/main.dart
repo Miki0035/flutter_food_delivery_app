@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/data/authentication_repository/auth_repository_provider.dart';
 import 'package:food_delivery_app/data/database_repository/database_repository.dart';
 import 'package:food_delivery_app/data/storage_repository/storage_repository.dart';
-import 'package:food_delivery_app/data/storage_repository/storage_repository.dart';
+import 'package:food_delivery_app/features/cart/providers/cart_provider.dart';
 import 'package:food_delivery_app/features/navigation/bottom_navigation_provider.dart';
 import 'package:food_delivery_app/features/search/providers/search_provider.dart';
 import 'package:food_delivery_app/utilis/constants/appwrite.dart';
@@ -42,8 +42,11 @@ void main() {
         ChangeNotifierProvider<FSearchProvider>(
           create: (context) => FSearchProvider(),
         ),
+        ChangeNotifierProvider<FCartProvider>(
+          create: (context) => FCartProvider(),
+        ),
       ],
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
