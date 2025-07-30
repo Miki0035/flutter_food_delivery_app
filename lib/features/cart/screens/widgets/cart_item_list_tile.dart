@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/common/widgets/buttons/image_as_icon_button.dart';
+import 'package:food_delivery_app/common/widgets/row_with_plus_minus_button_and_text.dart';
 import 'package:food_delivery_app/features/profile/screens/widgets/image_as_icon_container.dart';
-import 'package:food_delivery_app/features/search/screens/detail_screen.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
@@ -54,8 +54,8 @@ class FCartListTileContainer extends StatelessWidget {
           FImageAsIconContainer(
             image: image,
             isNetworkImage: true,
-            imageSize: 100.0,
-            containerSize: 100.0,
+            imageSize: 90.0,
+            containerSize: 90.0,
             borderRadius: 12.0,
           ),
 
@@ -77,7 +77,7 @@ class FCartListTileContainer extends StatelessWidget {
                       name,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: FSize.fontSizeLg * 1.1,
+                        fontSize: FSize.fontSizeLg,
                       ),
                     ),
                   ),
@@ -88,7 +88,7 @@ class FCartListTileContainer extends StatelessWidget {
                       style: TextStyle(
                         color: FColor.orange,
                         fontWeight: FontWeight.w700,
-                        fontSize: FSize.fontSizeLg * 1.1,
+                        fontSize: FSize.fontSizeLg,
                       ),
                     ),
                   ),

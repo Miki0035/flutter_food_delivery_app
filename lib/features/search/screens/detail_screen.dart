@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:food_delivery_app/common/widgets/buttons/image_as_icon_button.dart';
 import 'package:food_delivery_app/common/widgets/buttons/image_button_container.dart';
+import 'package:food_delivery_app/common/widgets/row_with_plus_minus_button_and_text.dart';
 import 'package:food_delivery_app/common/widgets/sliver_app_bar.dart';
 import 'package:food_delivery_app/features/cart/providers/cart_provider.dart';
 import 'package:food_delivery_app/features/search/providers/search_provider.dart';
@@ -210,18 +211,19 @@ class FDetailScreen extends StatelessWidget {
 
                       SizedBox(height: FSize.defaultSpace),
 
+                      // SIDE OPTIONS LIST VIEW
                       SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.16,
+                        height: MediaQuery.sizeOf(context).height * 0.14,
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
                           separatorBuilder:
                               (context, index) =>
-                                  SizedBox(width: FSize.defaultSpace * 1.5),
+                                  SizedBox(width: FSize.defaultSpace * 1.8),
                           itemCount: provider.toppings.length,
                           itemBuilder: (context, index) {
                             final custom = provider.toppings[index];
                             return Container(
-                              width: MediaQuery.sizeOf(context).width * 0.35,
+                              width: MediaQuery.sizeOf(context).width * 0.32,
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
@@ -238,7 +240,7 @@ class FDetailScreen extends StatelessWidget {
                                     child: Container(
                                       width:
                                           MediaQuery.sizeOf(context).width *
-                                          0.35,
+                                          0.32,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 4.0,
                                         vertical: FSize.normalSpace,
@@ -265,15 +267,25 @@ class FDetailScreen extends StatelessWidget {
                                               ),
                                             ),
 
-                                            FImageButtonContainer(
-                                              size: 30.0,
-                                              imageSize: 20.0,
+                                         FImageButtonContainer(
+                                                size: 30.0,
+                                                imageSize: 20.0,
 
-                                              imageColor: Colors.white,
-                                              backgroundColor: Colors.red,
-                                              image: FImage.plus,
-                                              onTap: () {},
-                                            ),
+                                                imageColor: Colors.white,
+                                                backgroundColor: Colors.red,
+                                                image: item.customizations.contains(custom.name) ? FImage.minus : FImage.plus,
+                                                onTap: () {
+                                                  if (!context.mounted) {
+                                                    return;
+                                                  }
+                                                  if (item.customizations.contains(custom.name)) {
+                                                    provider.removeCustomizationFromItem(item, custom.name);
+                                                  } else {
+                                                    provider.addCustomizationForItem(item, custom.name);
+                                                  }
+                                                },
+                                              ),
+
                                           ],
                                         ),
                                       ),
@@ -284,7 +296,7 @@ class FDetailScreen extends StatelessWidget {
                                     child: Container(
                                       width:
                                           MediaQuery.sizeOf(context).width *
-                                          0.35,
+                                          0.32,
                                       padding: EdgeInsets.all(
                                         FSize.normalSpace,
                                       ),
@@ -327,6 +339,8 @@ class FDetailScreen extends StatelessWidget {
 
                       SizedBox(height: FSize.defaultSpace),
 
+                      // SIDE OPTIONS LIST VIEW
+
                       Container(
                         height: MediaQuery.sizeOf(context).height * 0.14,
                         margin: EdgeInsets.symmetric(
@@ -341,7 +355,7 @@ class FDetailScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final custom = provider.options[index];
                             return Container(
-                              width: MediaQuery.sizeOf(context).width * 0.28,
+                              width: MediaQuery.sizeOf(context).width * 0.32,
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
@@ -358,7 +372,7 @@ class FDetailScreen extends StatelessWidget {
                                     child: Container(
                                       width:
                                           MediaQuery.sizeOf(context).width *
-                                          0.28,
+                                          0.32,
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 4.0,
                                         vertical: FSize.normalSpace,
@@ -390,8 +404,17 @@ class FDetailScreen extends StatelessWidget {
                                               imageSize: 20.0,
                                               imageColor: Colors.white,
                                               backgroundColor: Colors.red,
-                                              image: FImage.plus,
-                                              onTap: () {},
+                                              image: item.customizations.contains(custom.name) ? FImage.minus : FImage.plus,
+                                              onTap: () {
+                                                if (!context.mounted) {
+                                                  return;
+                                                }
+                                                if (item.customizations.contains(custom.name)) {
+                                                  provider.removeCustomizationFromItem(item, custom.name);
+                                                } else {
+                                                  provider.addCustomizationForItem(item, custom.name);
+                                                }
+                                              },
                                             ),
                                           ],
                                         ),
@@ -403,7 +426,7 @@ class FDetailScreen extends StatelessWidget {
                                     child: Container(
                                       width:
                                           MediaQuery.sizeOf(context).width *
-                                          0.28,
+                                          0.32,
                                       padding: EdgeInsets.all(
                                         FSize.normalSpace,
                                       ),
@@ -458,18 +481,26 @@ class FDetailScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   FPlusMinuTextRow(
-                                    plusTap: provider.increase,
-                                    minusTap: provider.decrease,
+                                    plusTap: () {
+                                      if (!context.mounted) return;
+                                      provider.increase();
+                                    },
+                                    minusTap: () {
+                                      if (!context.mounted) return;
+                                      provider.decrease();
+                                    },
                                     text: "${provider.quantity}",
                                   ),
 
                                   // ADD TO CART BUTTON
                                   GestureDetector(
-                                    onTap:
-                                        () => provider.addItemToCart(
-                                          item,
-                                          provider.quantity,
-                                        ),
+                                    onTap: () {
+                                      if (!context.mounted) return;
+                                      provider.addItemToCart(
+                                        item,
+                                        provider.quantity,
+                                      );
+                                    },
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
                                         vertical: FSize.normalSpace,
@@ -483,6 +514,7 @@ class FDetailScreen extends StatelessWidget {
                                       ),
                                       child: GestureDetector(
                                         onTap: () {
+                                          if (!context.mounted) return;
                                           final success = provider
                                               .addItemToCart(
                                                 item,
@@ -540,55 +572,6 @@ class FDetailScreen extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class FPlusMinuTextRow extends StatelessWidget {
-  final VoidCallback minusTap;
-  final VoidCallback plusTap;
-  final String text;
-
-  const FPlusMinuTextRow({
-    super.key,
-    required this.minusTap,
-    required this.plusTap,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        FImageButtonContainer(
-          image: FImage.minus,
-          size: 40.0,
-          imageSize: 20.0,
-          backgroundColor: FColor.orange.withValues(alpha: 0.1),
-          imageColor: FColor.orange,
-          onTap: minusTap,
-        ),
-        SizedBox(width: FSize.normalSpace),
-        Text(
-          text,
-          softWrap: true,
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: FSize.fontSizeLg,
-          ),
-        ),
-        SizedBox(width: FSize.normalSpace),
-
-        FImageButtonContainer(
-          image: FImage.plus,
-          size: 40.0,
-          imageSize: 20.0,
-
-          backgroundColor: FColor.orange.withValues(alpha: 0.1),
-          imageColor: FColor.orange,
-          onTap: plusTap,
-        ),
-      ],
     );
   }
 }

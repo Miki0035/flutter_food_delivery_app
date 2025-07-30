@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/common/data/models/menu_item_model.dart';
 import 'package:food_delivery_app/common/data/models/seach_menu_category_model.dart';
@@ -5,10 +7,15 @@ import 'package:food_delivery_app/common/data/models/topping_option_model.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 
 class FSearchProvider extends ChangeNotifier {
-  final controller = TextEditingController();
+  final query = TextEditingController();
   late final List<FMenuItem> menus;
-  int selectedIndex = 0;
+  int selectedCategory = 0;
+  String _searchText = "";
   FMenuItem? selectedItem;
+
+  Timer? _debounce;
+
+  List<FMenuItem> filteredMenus = [];
 
   //TOPPINGS
   final List<FToppingOptionModel> toppings = [
@@ -104,6 +111,7 @@ class FSearchProvider extends ChangeNotifier {
   ];
 
   FSearchProvider() {
+    query.addListener(_onSearchChanged);
     menus = [
       FMenuItem(
         name: "Classic Cheeseburger",
@@ -297,23 +305,63 @@ class FSearchProvider extends ChangeNotifier {
         customizations: ["Bacon", "Tomatoes", "Mozzarella Sticks", "Iced Tea"],
       ),
     ];
+    filteredMenus = menus;
   }
 
-  void changeIndex(int index) {
-    selectedIndex = index;
+  void _onSearchChanged() {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      _searchText = query.text.trim().toLowerCase();
+      print("Search text updated: $_searchText");
+      changeCategory(selectedCategory);
+    });
+  }
+
+  // FILTER WITH CATEGORY AND SEARCH QUERY
+  void changeCategory(int index) {
+    selectedCategory = index;
+    print("search text: $_searchText");
+    filteredMenus =
+        menus.where((menu) {
+          final filteredBySearch = menu.name.trim().toLowerCase().contains(
+            _searchText,
+          );
+
+          final filteredByCategories =
+              categories[selectedCategory].name.toLowerCase() == "all" ||
+              menu.category.name == categories[selectedCategory].name;
+          return filteredByCategories && filteredBySearch;
+        }).toList();
     notifyListeners();
   }
 
   //returns Category object to menu
   FSearchMenuCategory getCategoryByName(String name) {
-    return categories.firstWhere(
-      (category) => category.name == name,
-      orElse: () => categories.first,
-    );
+    return categories.firstWhere((category) => category.name == name);
   }
 
   void setSelectedItem(int index) {
     selectedItem = menus[index];
     notifyListeners();
+  }
+
+  // sets customization for item
+  void addCustomizationForItem(FMenuItem item, String customizationName) {
+    item.customizations.add(customizationName);
+    notifyListeners();
+  }
+
+  // sets customization for item
+  void removeCustomizationFromItem(FMenuItem item, String customizationName) {
+    item.customizations.remove(customizationName);
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    query.removeListener(_onSearchChanged);
+    _debounce?.cancel();
+    query.dispose();
+    super.dispose();
   }
 }

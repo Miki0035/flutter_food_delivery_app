@@ -129,6 +129,7 @@ class SignUpView extends StatelessWidget {
                             ),
                             SizedBox(height: FSize.defaultSpace),
                             FTextButton(
+                              width:  MediaQuery.sizeOf(context).width * 0.8,
                               onPressed: () async {
                                 final success = await provider.signUp();
                                 if (success && context.mounted) {

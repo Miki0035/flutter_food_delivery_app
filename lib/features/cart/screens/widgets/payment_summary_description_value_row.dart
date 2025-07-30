@@ -3,7 +3,7 @@ import 'package:food_delivery_app/utilis/constants/sizes.dart';
 
 class FPaymentSummaryRow extends StatelessWidget {
   final String description;
-  final String value;
+  final double value;
 
   const FPaymentSummaryRow({
     super.key,
@@ -25,7 +25,7 @@ class FPaymentSummaryRow extends StatelessWidget {
           ),
         ),
         Text(
-          "\$$value",
+          value == 0 ? " Free" : "\$${value.toStringAsFixed(2)}",
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: FSize.fontSizeLg,

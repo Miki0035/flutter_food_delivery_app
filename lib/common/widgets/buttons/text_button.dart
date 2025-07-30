@@ -5,13 +5,19 @@ import 'package:food_delivery_app/utilis/constants/sizes.dart';
 class FTextButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String buttonText;
+  final double width;
 
-  const FTextButton({super.key, this.onPressed, required this.buttonText});
+  const FTextButton({
+    super.key,
+    this.onPressed,
+    required this.buttonText,
+    required this.width,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.sizeOf(context).width * 0.8,
+      width: width,
       child: TextButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

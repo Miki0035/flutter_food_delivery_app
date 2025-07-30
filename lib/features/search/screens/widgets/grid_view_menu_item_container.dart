@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/features/cart/providers/cart_provider.dart';
 import 'package:food_delivery_app/features/profile/screens/widgets/image_as_icon_container.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
+import 'package:provider/provider.dart';
 
 class FGridViewItemContainer extends StatelessWidget {
   final String name;
@@ -10,6 +12,7 @@ class FGridViewItemContainer extends StatelessWidget {
   final double price;
   final String index;
   final VoidCallback? onTap;
+  final VoidCallback? addToCart;
 
   const FGridViewItemContainer({
     super.key,
@@ -18,10 +21,12 @@ class FGridViewItemContainer extends StatelessWidget {
     this.onTap,
     required this.index,
     required this.image,
+    this.addToCart,
   });
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = context.watch<FCartProvider>();
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -93,7 +98,7 @@ class FGridViewItemContainer extends StatelessWidget {
                         ),
                       ),
                       TextButton.icon(
-                        onPressed: () {},
+                        onPressed: addToCart,
                         style: TextButton.styleFrom(
                           overlayColor: FColor.orange.withValues(alpha: 0.5),
                           splashFactory: InkRipple.splashFactory,

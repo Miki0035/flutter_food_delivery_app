@@ -44,4 +44,9 @@ class FCartProvider extends ChangeNotifier {
     item.quantity = item.quantity + 1;
     notifyListeners();
   }
+
+  double totalPrice() {
+    final total = cartItems.map((cart) => cart.item.price * cart.quantity).fold(0.0, (prev, element) => prev + element);
+    return total;
+  }
 }

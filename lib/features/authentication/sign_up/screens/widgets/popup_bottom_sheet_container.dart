@@ -47,7 +47,7 @@ class FPopUpBottomSheetContainer extends StatelessWidget {
             ),
           ),
           SizedBox(height: FSize.defaultSpace),
-          FTextButton(onPressed: onPressed, buttonText: 'Go to HomePage'),
+          FTextButton(onPressed: onPressed, buttonText: 'Go to HomePage', width:  MediaQuery.sizeOf(context).width * 0.8,),
         ],
       ),
     );
