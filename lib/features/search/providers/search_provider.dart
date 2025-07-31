@@ -341,7 +341,7 @@ class FSearchProvider extends ChangeNotifier {
   }
 
   void setSelectedItem(int index)  {
-    selectedItem = menus[index];
+    selectedItem = filteredMenus[index];
     notifyListeners();
   }
 
