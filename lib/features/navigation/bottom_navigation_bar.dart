@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery_app/common/widgets/buttons/bottom_navigation_bar_button.dart';
 import 'package:food_delivery_app/features/navigation/bottom_navigation_provider.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
-import 'package:food_delivery_app/utilis/constants/sizes.dart';
 import 'package:provider/provider.dart';
 
 class FBottomNavBar extends StatelessWidget {

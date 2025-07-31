@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/widgets/stacked_container_with_notification_count.dart';
-import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
 
 class FSliverAppBar extends StatelessWidget {

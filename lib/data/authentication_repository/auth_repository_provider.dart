@@ -35,7 +35,6 @@ class AuthRepository extends ChangeNotifier {
       await _db.getUserDocument(user: user);
       return user;
     } catch (e) {
-      print('AuthRepo error logging user: $e');
       return null;
     }
   }
@@ -65,7 +64,6 @@ class AuthRepository extends ChangeNotifier {
       );
       return user;
     } catch (e) {
-      print('AuthRepo error createUser: $e');
       return null;
     } finally {
       notifyListeners();
@@ -78,13 +76,10 @@ class AuthRepository extends ChangeNotifier {
       final user = await _account.get();
       return user;
     } on AppwriteException catch (e) {
-      print('Error getting user: $e');
       if (e.code == 401) {
-        print('User not logged in (401). Returning null.');
         notifyListeners(); // Notify to clear state for other listeners
         return null;
       } else {
-        print('Appwrite get user error: ${e.message} (Code: ${e.code})');
         // IMPORTANT: Re-throw the error so FutureBuilder catches it
         return null;
       }
@@ -97,7 +92,6 @@ class AuthRepository extends ChangeNotifier {
       await _account.deleteSession(sessionId: 'current');
       return true;
     } catch (e) {
-      print('Error getting user: $e');
       return false;
     } finally {
       notifyListeners();

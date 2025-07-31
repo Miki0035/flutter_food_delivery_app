@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
-import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
 
 class FStackedContainerWithNotificationCount extends StatelessWidget {

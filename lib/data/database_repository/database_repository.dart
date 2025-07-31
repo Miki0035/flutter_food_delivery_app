@@ -32,10 +32,8 @@ class DatabaseRepository extends ChangeNotifier {
       );
       _doc = result;
       dbUser = FUserDocument.fromMap(result.data);
-      print('User created: $result');
       return true;
     } catch (e) {
-      print('DatabaseRepo Error creating user document: $e');
       return false;
     } finally {
       notifyListeners();
@@ -69,7 +67,6 @@ class DatabaseRepository extends ChangeNotifier {
 
       return updated;
     } catch (e) {
-      print('DatabaseRepo update document error: $e');
       return null;
     } finally {
       notifyListeners();
@@ -90,7 +87,6 @@ class DatabaseRepository extends ChangeNotifier {
       dbUser = FUserDocument.fromMap(results.documents.first.data);
       return results.documents.first;
     } catch (e) {
-      print('DatabaseRepo get document error: $e');
       return null;
     } finally {
       notifyListeners();

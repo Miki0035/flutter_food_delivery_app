@@ -20,10 +20,8 @@ class StorageRepository extends ChangeNotifier {
         bucketId: AppWriteConfig.APPWRITE_BUCKET_ID,
         fileId: file.$id,
       );
-      print('File and avatarURl created : $avatarUrl');
       return avatarUrl;
     } catch (e) {
-      print('StorageRepo Error creating file: $e');
       return null;
     }
   }

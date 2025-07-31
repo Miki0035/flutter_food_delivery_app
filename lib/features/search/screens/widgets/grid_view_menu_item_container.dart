@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/features/cart/providers/cart_provider.dart';
 import 'package:food_delivery_app/features/profile/screens/widgets/image_as_icon_container.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
-import 'package:provider/provider.dart';
 
 class FGridViewItemContainer extends StatelessWidget {
   final String name;

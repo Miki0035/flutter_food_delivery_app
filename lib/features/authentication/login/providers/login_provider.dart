@@ -39,7 +39,6 @@ class LoginProvider extends ChangeNotifier {
       }
       return true;
     } catch (e) {
-      print('LoginProvider error :$e');
       rethrow;
     } finally {
       setIsLoading(false);

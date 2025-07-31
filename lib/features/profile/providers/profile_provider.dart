@@ -43,9 +43,7 @@ class FProfileProvider extends ChangeNotifier {
         address1Controller.text = _db.dbUser.address1 ?? "";
         address2Controller.text = _db.dbUser.address2 ?? "";
       }
-      print('ProfileProvider user : ${userDoc.address1}');
     } catch (e) {
-      print('ProfileProvider e: $e');
       rethrow;
     } finally {
       notifyListeners();

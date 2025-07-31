@@ -312,7 +312,6 @@ class FSearchProvider extends ChangeNotifier {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
       _searchText = query.text.trim().toLowerCase();
-      print("Search text updated: $_searchText");
       changeCategory(selectedCategory);
     });
   }
@@ -320,7 +319,6 @@ class FSearchProvider extends ChangeNotifier {
   // FILTER WITH CATEGORY AND SEARCH QUERY
   void changeCategory(int index) {
     selectedCategory = index;
-    print("search text: $_searchText");
     filteredMenus =
         menus.where((menu) {
           final filteredBySearch = menu.name.trim().toLowerCase().contains(
