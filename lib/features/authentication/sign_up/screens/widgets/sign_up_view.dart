@@ -4,7 +4,6 @@ import 'package:food_delivery_app/common/widgets/buttons/text_button.dart';
 import 'package:food_delivery_app/features/authentication/login/screens/login_screen.dart';
 import 'package:food_delivery_app/features/authentication/sign_up/providers/sign_up_provider.dart';
 import 'package:food_delivery_app/features/authentication/sign_up/screens/widgets/popup_bottom_sheet_container.dart';
-import 'package:food_delivery_app/features/home/screens/home.dart';
 import 'package:food_delivery_app/features/navigation/bottom_navigation_bar.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
@@ -129,7 +128,7 @@ class SignUpView extends StatelessWidget {
                             ),
                             SizedBox(height: FSize.defaultSpace),
                             FTextButton(
-                              width:  MediaQuery.sizeOf(context).width * 0.8,
+                              width: MediaQuery.sizeOf(context).width * 0.8,
                               onPressed: () async {
                                 final success = await provider.signUp();
                                 if (success && context.mounted) {
@@ -137,6 +136,10 @@ class SignUpView extends StatelessWidget {
                                     context: context,
                                     builder:
                                         (context) => FPopUpBottomSheetContainer(
+                                          buttonText: 'Go to HomePage',
+                                          message: 'Login Successful',
+                                          description:
+                                              "You're all set to continue where you left off.",
                                           onPressed: () {
                                             Navigator.pushAndRemoveUntil(
                                               context,

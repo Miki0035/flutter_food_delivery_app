@@ -69,7 +69,10 @@ class FSearchView extends StatelessWidget {
                             itemCount: provider.categories.length,
                             itemBuilder:
                                 (context, index) => GestureDetector(
-                                  onTap: () => provider.changeCategory(index),
+                                  onTap: () {
+                                    if (!context.mounted) return;
+                                    provider.changeCategory(index);
+                                  },
                                   child: Container(
                                     width: 90.0,
                                     margin: EdgeInsets.symmetric(vertical: 4.0),
@@ -112,10 +115,12 @@ class FSearchView extends StatelessWidget {
                 ),
 
                 provider.filteredMenus.isEmpty
-                    ? FEmptyStateContainer(
-                      message: "Nothing matched your search",
-                      description:
-                          "Try a different search term or check for typos.",
+                    ? SliverToBoxAdapter(
+                      child: FEmptyStateContainer(
+                        message: "Nothing matched your search",
+                        description:
+                            "Try a different search term or check for typos.",
+                      ),
                     )
                     //GRID VIEW SECTION
                     : SliverPadding(
@@ -135,6 +140,7 @@ class FSearchView extends StatelessWidget {
                         itemBuilder:
                             (context, index) => FGridViewItemContainer(
                               onTap: () {
+                                if (!context.mounted) return;
                                 provider.setSelectedItem(index);
                                 Navigator.push(
                                   context,

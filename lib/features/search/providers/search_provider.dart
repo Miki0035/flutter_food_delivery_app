@@ -340,7 +340,7 @@ class FSearchProvider extends ChangeNotifier {
     return categories.firstWhere((category) => category.name == name);
   }
 
-  void setSelectedItem(int index) {
+  void setSelectedItem(int index)  {
     selectedItem = menus[index];
     notifyListeners();
   }

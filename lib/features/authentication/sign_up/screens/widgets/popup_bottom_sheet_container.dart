@@ -7,8 +7,17 @@ import '../../../../../common/widgets/buttons/text_button.dart';
 
 class FPopUpBottomSheetContainer extends StatelessWidget {
   final VoidCallback? onPressed;
+  final String message;
+  final String description;
+  final String buttonText;
 
-  const FPopUpBottomSheetContainer({super.key, this.onPressed});
+  const FPopUpBottomSheetContainer({
+    super.key,
+    this.onPressed,
+    required this.message,
+    required this.description,
+    required this.buttonText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +41,7 @@ class FPopUpBottomSheetContainer extends StatelessWidget {
             fit: BoxFit.contain,
           ),
           Text(
-            'Login Successful',
+            message,
             style: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: FSize.fontSizeLg * 1.5,
@@ -40,14 +49,18 @@ class FPopUpBottomSheetContainer extends StatelessWidget {
           ),
           SizedBox(height: FSize.normalSpace),
           Text(
-            "You're all set to continue where you left off.",
+            description,
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: FSize.fontSizeLg,
             ),
           ),
           SizedBox(height: FSize.defaultSpace),
-          FTextButton(onPressed: onPressed, buttonText: 'Go to HomePage', width:  MediaQuery.sizeOf(context).width * 0.8,),
+          FTextButton(
+            onPressed: onPressed,
+            buttonText: buttonText,
+            width: MediaQuery.sizeOf(context).width * 0.8,
+          ),
         ],
       ),
     );

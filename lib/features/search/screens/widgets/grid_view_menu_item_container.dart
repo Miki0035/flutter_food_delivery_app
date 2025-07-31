@@ -26,7 +26,6 @@ class FGridViewItemContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartProvider = context.watch<FCartProvider>();
     return GestureDetector(
       onTap: onTap,
       child: Container(

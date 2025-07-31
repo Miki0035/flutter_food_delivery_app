@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/common/data/models/home_list_item_model.dart';
+import 'package:food_delivery_app/features/navigation/bottom_navigation_provider.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
+import 'package:provider/provider.dart';
 
 class FHomeMenuItemContainer extends StatelessWidget {
   final HomeListItem item;
@@ -9,9 +11,13 @@ class FHomeMenuItemContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final navProvider = context.watch<FBottomNavBarProvider>();
     return Material(
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          if (!context.mounted) return;
+          navProvider.changeIndex(1);
+        },
         borderRadius: BorderRadius.circular(12.0),
         splashColor: Colors.redAccent.withValues(alpha: 0.8),
         child: Ink(
