@@ -1,5 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:food_delivery_app/data/authentication_repository/auth_repository_provider.dart';
 import 'package:food_delivery_app/data/database_repository/database_repository.dart';
 import 'package:food_delivery_app/data/storage_repository/storage_repository.dart';
@@ -7,11 +8,16 @@ import 'package:food_delivery_app/features/cart/providers/cart_provider.dart';
 import 'package:food_delivery_app/features/navigation/bottom_navigation_provider.dart';
 import 'package:food_delivery_app/features/search/providers/search_provider.dart';
 import 'package:food_delivery_app/utilis/constants/appwrite.dart';
+import 'package:food_delivery_app/utilis/constants/stripe.dart';
 import 'package:provider/provider.dart';
 import 'app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // STRIPE CONFIG
+  Stripe.publishableKey = StripeConfig.publishableKey;
+
 
   final client =
       Client()

@@ -4,6 +4,7 @@ import 'package:food_delivery_app/common/widgets/appbar_tile_with_subtitle.dart'
 import 'package:food_delivery_app/common/widgets/sliver_app_bar.dart';
 import 'package:food_delivery_app/common/widgets/stacked_container_with_notification_count.dart';
 import 'package:food_delivery_app/data/database_repository/database_repository.dart';
+import 'package:food_delivery_app/features/cart/providers/cart_provider.dart';
 import 'package:food_delivery_app/features/home/screens/widgets/home_menu_item_container.dart';
 import 'package:food_delivery_app/utilis/constants/images.dart';
 import 'package:food_delivery_app/utilis/constants/sizes.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = context.read<FCartProvider>();
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -36,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                     right: FSize.defaultSpace,
                   ),
                   child: FStackedContainerWithNotificationCount(
-                    notificationCount: 2,
+                    notificationCount: cartProvider.cartItems.length,
                     backgroundColor: Colors.black,
                     iconColor: Colors.white,
                     image: FImage.bag,

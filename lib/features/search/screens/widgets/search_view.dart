@@ -38,7 +38,7 @@ class FSearchView extends StatelessWidget {
                         right: FSize.defaultSpace,
                       ),
                       child: FStackedContainerWithNotificationCount(
-                        notificationCount: 2,
+                        notificationCount: cartProvider.cartItems.length,
                         backgroundColor: Colors.black,
                         iconColor: Colors.white,
                         image: FImage.bag,

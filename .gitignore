@@ -46,3 +46,4 @@ app.*.map.json
 
 #.env
 /lib/utilis/constants/appwrite.dart
+/lib/utilis/constants/stripe.dart

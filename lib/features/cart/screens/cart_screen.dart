@@ -43,7 +43,7 @@ class CartScreen extends StatelessWidget {
                     centerTitle: true,
                     actions: [FImageAsIconButton(image: FImage.search)],
                   ),
-              
+
                   // ADDRESS LOCATION
                   SliverPadding(
                     padding: EdgeInsets.all(FSize.defaultSpace),
@@ -59,7 +59,7 @@ class CartScreen extends StatelessWidget {
                                   "${user.userDoc?.address1 ?? "update profile"} ",
                             ),
                           ),
-              
+
                           OutlinedButton(
                             onPressed: () {
                               navProvider.changeIndex(3);
@@ -80,7 +80,7 @@ class CartScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-              
+
                   provider.cartItems.isEmpty
                       ? SliverToBoxAdapter(
                         child: FEmptyStateContainer(
@@ -97,7 +97,7 @@ class CartScreen extends StatelessWidget {
                             childCount: provider.cartItems.length,
                             (context, index) {
                               final cartItem = provider.cartItems[index];
-              
+
                               return FCartListTileContainer(
                                 price: (cartItem.item.price * cartItem.quantity)
                                     .toStringAsFixed(2),
@@ -119,7 +119,7 @@ class CartScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-              
+
                   // PAYMENT SUMMARY SECTION
                   if (provider.cartItems.isNotEmpty)
                     SliverToBoxAdapter(
@@ -154,15 +154,15 @@ class CartScreen extends StatelessWidget {
                               value: 0,
                             ),
                             SizedBox(height: FSize.defaultSpace),
-              
+
                             Divider(
                               height: 0.5,
                               endIndent: 5.0,
                               color: Colors.grey.withValues(alpha: 0.2),
                             ),
-              
+
                             SizedBox(height: FSize.defaultSpace),
-              
+
                             FPaymentSummaryRow(
                               description: "Total",
                               value: provider.totalPrice(),
@@ -171,7 +171,7 @@ class CartScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-              
+
                   if (provider.cartItems.isNotEmpty)
                     SliverToBoxAdapter(
                       child: Align(
@@ -179,22 +179,24 @@ class CartScreen extends StatelessWidget {
                         child: FTextButton(
                           width: MediaQuery.sizeOf(context).width * 0.9,
                           buttonText: "Order Now",
-                          onPressed: () {
-                            provider.clearCartItems();
-                            showModalBottomSheet(
-                              context: context,
-                              builder:
-                                  (context) => FPopUpBottomSheetContainer(
-                                    buttonText: "Go to menu screen",
-                                    message: "Order Successful!",
-                                    description:
-                                        "Your order is placed and will arrive shortly.",
-                                    onPressed: () {
-                                      navProvider.changeIndex(1);
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                            );
+                          onPressed: () async {
+                            final success = await provider.pay();
+                            if (success && context.mounted) {
+                              showModalBottomSheet(
+                                context: context,
+                                builder:
+                                    (context) => FPopUpBottomSheetContainer(
+                                      buttonText: "Go to menu screen",
+                                      message: "Order Successful!",
+                                      description:
+                                          "Your order is placed and will arrive shortly.",
+                                      onPressed: () {
+                                        navProvider.changeIndex(1);
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                              );
+                            }
                           },
                         ),
                       ),
