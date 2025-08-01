@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/common/widgets/buttons/bottom_navigation_bar_button.dart';
+import 'package:food_delivery_app/features/cart/providers/cart_provider.dart';
 import 'package:food_delivery_app/features/navigation/bottom_navigation_provider.dart';
 import 'package:food_delivery_app/utilis/constants/colors.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ class FBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartProvider = context.watch<FCartProvider>();
     return Scaffold(
       body: Consumer<FBottomNavBarProvider>(
         builder:
@@ -25,9 +27,9 @@ class FBottomNavBar extends StatelessWidget {
                   child: Container(
                     height: 70,
                     margin: EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: MediaQuery.of(context).padding.bottom * 1.2,
-                  ),
+                      horizontal: 24,
+                      vertical: MediaQuery.of(context).padding.bottom * 1.2,
+                    ),
                     padding: EdgeInsets.symmetric(vertical: 4.0),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -57,6 +59,10 @@ class FBottomNavBar extends StatelessWidget {
                                   navProvider.currentIndex == nav.$1
                                       ? FColor.orange
                                       : Colors.black,
+                              notificationCount:
+                                  nav.$1 == 2
+                                      ? cartProvider.cartItems.length
+                                      : 0,
                             );
                           }).toList(),
                     ),

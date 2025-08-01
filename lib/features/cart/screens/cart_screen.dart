@@ -41,7 +41,14 @@ class CartScreen extends StatelessWidget {
                       ),
                     ),
                     centerTitle: true,
-                    actions: [FImageAsIconButton(image: FImage.search)],
+                    actions: [
+                      FImageAsIconButton(
+                        image: FImage.search,
+                        onPressed: () {
+                          navProvider.changeIndex(1);
+                        },
+                      ),
+                    ],
                   ),
 
                   // ADDRESS LOCATION
