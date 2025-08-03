@@ -179,6 +179,7 @@ class ProfileView extends StatelessWidget {
                       FOutlinedButton(
                         onPressed: () async {
                           final result = await provider.logout();
+                          print('Result: $result');
                           if (result && context.mounted) {
                             Navigator.pushAndRemoveUntil(
                               context,

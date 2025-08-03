@@ -34,18 +34,18 @@ class FProfileProvider extends ChangeNotifier {
   }
 
   Future<void> init() async {
+    setIsLoading(true);
+    print(' database user: ${_db.dbUser}');
     try {
-      final user = await _auth.getUser();
-      if (user != null) {
-        emailController.text = _db.dbUser.email;
-        fullNameController.text = _db.dbUser.name;
-        phoneController.text = _db.dbUser.phoneNumber ?? "";
-        address1Controller.text = _db.dbUser.address1 ?? "";
-        address2Controller.text = _db.dbUser.address2 ?? "";
-      }
+      emailController.text = _db.dbUser.email;
+      fullNameController.text = _db.dbUser.name;
+      phoneController.text = _db.dbUser.phoneNumber ?? "";
+      address1Controller.text = _db.dbUser.address1 ?? "";
+      address2Controller.text = _db.dbUser.address2 ?? "";
     } catch (e) {
       rethrow;
     } finally {
+      setIsLoading(false);
       notifyListeners();
     }
   }
@@ -95,6 +95,7 @@ class FProfileProvider extends ChangeNotifier {
       rethrow;
     } finally {
       setIsLoading(false);
+      notifyListeners();
     }
   }
 }

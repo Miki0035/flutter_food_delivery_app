@@ -62,6 +62,11 @@ class AuthRepository extends ChangeNotifier {
 
         // avatar: avatarUrl.toString(),
       );
+
+      await _account.createEmailPasswordSession(
+        email: email,
+        password: password,
+      );
       return user;
     } catch (e) {
       return null;
@@ -93,8 +98,6 @@ class AuthRepository extends ChangeNotifier {
       return true;
     } catch (e) {
       return false;
-    } finally {
-      notifyListeners();
     }
   }
 }
