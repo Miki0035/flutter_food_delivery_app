@@ -20,183 +20,189 @@ class SignUpView extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body:
-          provider.isLoading
-              ? Center(child: CircularProgressIndicator(color: FColor.orange))
-              : SingleChildScrollView(
+      provider.isLoading
+          ? Center(child: CircularProgressIndicator(color: FColor.orange))
+          : SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                ClipPath(
+                  clipper: BottomWaveClipper(),
+                  child: Image.asset(
+                    FImage.loginGraphicTwo,
+                    fit: BoxFit.fill,
+                    width: double.infinity,
+                    height: 430.0,
+                  ),
+                ),
+
+                Positioned(
+                  top: 360,
+                  left: MediaQuery
+                      .sizeOf(context)
+                      .width / 2 - 60,
+                  child: Image.asset(
+                    FImage.logo,
+                    fit: BoxFit.contain,
+                    width: 120.0,
+                    height: 120.0,
+                  ),
+                ),
+              ],
+            ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: FSize.defaultSpace * 2,
+                vertical: FSize.defaultSpace,
+              ),
+              child: Form(
+                key: provider.signUpFormKey,
                 child: Column(
                   children: [
-                    Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        ClipPath(
-                          clipper: BottomWaveClipper(),
-                          child: Image.asset(
-                            FImage.loginGraphicTwo,
-                            fit: BoxFit.fill,
-                            width: double.infinity,
-                            height: 430.0,
-                          ),
-                        ),
-
-                        Positioned(
-                          top: 360,
-                          left: MediaQuery.sizeOf(context).width / 2 - 60,
-                          child: Image.asset(
-                            FImage.logo,
-                            fit: BoxFit.contain,
-                            width: 120.0,
-                            height: 120.0,
-                          ),
-                        ),
-                      ],
-                    ),
-
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: FSize.defaultSpace * 2,
-                        vertical: FSize.defaultSpace,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: FSize.normalSpace,
                       ),
-                      child: Form(
-                        key: provider.signUpFormKey,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: FSize.normalSpace,
-                              ),
-                              child: TextFormField(
-                                validator:
-                                    (value) => FValidator.validateEmptyText(
-                                      "Full Name",
-                                      value,
-                                    ),
-                                controller: provider.fullNameTextController,
-                                cursorColor: FColor.orange,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: FSize.fontSizeMd,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: "Full Name",
-                                ),
-                              ),
+                      child: TextFormField(
+                        validator:
+                            (value) =>
+                            FValidator.validateEmptyText(
+                              "Full Name",
+                              value,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: FSize.normalSpace,
-                              ),
-                              child: TextFormField(
-                                controller: provider.emailTextController,
-                                validator:
-                                    (value) => FValidator.validateEmail(value),
-                                cursorColor: FColor.orange,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: FSize.fontSizeMd,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: "Email address",
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: FSize.normalSpace,
-                              ),
-                              child: TextFormField(
-                                controller: provider.passwordTextController,
-                                validator:
-                                    (value) =>
-                                        FValidator.validatePassword(value),
-                                cursorColor: FColor.orange,
-                                obscureText: provider.obscureText,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: FSize.fontSizeMd,
-                                ),
-                                decoration: InputDecoration(
-                                  labelText: "Password",
-                                  suffixIcon: IconButton(
-                                    onPressed: () => provider.setObscureText(),
-                                    icon:
-                                        provider.obscureText
-                                            ? Icon(Icons.visibility_off)
-                                            : Icon(Icons.visibility),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: FSize.defaultSpace),
-                            FTextButton(
-                              width: MediaQuery.sizeOf(context).width * 0.8,
-                              onPressed: () async {
-                                final success = await provider.signUp();
-                                if (success && context.mounted) {
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder:
-                                        (context) => FPopUpBottomSheetContainer(
-                                          buttonText: 'Go to HomePage',
-                                          message: 'Login Successful',
-                                          description:
-                                              "You're all set to continue where you left off.",
-                                          onPressed: () {
-                                            Navigator.pushAndRemoveUntil(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder:
-                                                    (context) =>
-                                                        const FBottomNavBar(),
-                                              ),
-                                              (route) => false,
-                                            );
-                                          },
-                                        ),
-                                  );
-                                }
-                              },
-                              buttonText: 'Sign Up',
-                            ),
-                            SizedBox(height: FSize.defaultSpace),
-
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  "Already have an account?",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                ),
-                                TextButton(
+                        controller: provider.fullNameTextController,
+                        cursorColor: FColor.orange,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: FSize.fontSizeMd,
+                        ),
+                        decoration: InputDecoration(
+                          labelText: "Full Name",
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: FSize.normalSpace,
+                      ),
+                      child: TextFormField(
+                        controller: provider.emailTextController,
+                        validator:
+                            (value) => FValidator.validateEmail(value),
+                        cursorColor: FColor.orange,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: FSize.fontSizeMd,
+                        ),
+                        decoration: InputDecoration(
+                          labelText: "Email address",
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: FSize.normalSpace,
+                      ),
+                      child: TextFormField(
+                        controller: provider.passwordTextController,
+                        validator:
+                            (value) =>
+                            FValidator.validatePassword(value),
+                        cursorColor: FColor.orange,
+                        obscureText: provider.obscureText,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: FSize.fontSizeMd,
+                        ),
+                        decoration: InputDecoration(
+                          labelText: "Password",
+                          suffixIcon: IconButton(
+                            onPressed: () => provider.setObscureText(),
+                            icon:
+                            provider.obscureText
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: FSize.defaultSpace),
+                    FTextButton(
+                      width: MediaQuery
+                          .sizeOf(context)
+                          .width * 0.8,
+                      onPressed: () async {
+                        final success = await provider.signUp();
+                        if (success && context.mounted) {
+                          showModalBottomSheet(
+                            context: context,
+                            builder:
+                                (context) =>
+                                FPopUpBottomSheetContainer(
+                                  buttonText: 'Go to Home Page',
+                                  message: 'Account Created',
+                                  description:
+                                  "You're all set to continue.",
                                   onPressed: () {
                                     Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => LoginScreen(),
+                                        builder:
+                                            (context) =>
+                                        const FBottomNavBar(),
                                       ),
-                                      (route) => false,
+                                          (route) => false,
                                     );
                                   },
-                                  style: TextButton.styleFrom(
-                                    padding: EdgeInsets.zero,
-                                  ),
-                                  child: Text(
-                                    "Login",
-                                    style: TextStyle(
-                                      color: FColor.orange,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
                                 ),
-                              ],
-                            ),
-                          ],
+                          );
+                        }
+                      },
+                      buttonText: 'Sign Up',
+                    ),
+                    SizedBox(height: FSize.defaultSpace),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Already have an account?",
+                          style: TextStyle(fontWeight: FontWeight.w500),
                         ),
-                      ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ),
+                                  (route) => false,
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                          ),
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              color: FColor.orange,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
