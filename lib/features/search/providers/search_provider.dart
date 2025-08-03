@@ -115,7 +115,9 @@ class FSearchProvider extends ChangeNotifier {
     menus = [
       FMenuItem(
         name: "Classic Cheeseburger",
-        description: "Beef patty, cheese, lettuce, tomato",
+        description:
+            "A timeless favorite, the Classic Cheeseburger brings together a juicy beef patty, "
+            "melty cheese, crisp lettuce, and fresh tomato—crafted for that perfect bite every time.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/044/844/600/large_2x/homemade-fresh-tasty-burger-with-meat-and-cheese-classic-cheese-burger-and-vegetable-ai-generated-free-png.png",
         price: 25.99,
@@ -127,7 +129,9 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Pepperoni Pizza",
-        description: "Loaded with cheese and pepperoni slices",
+        description:
+            "Crave-worthy and cheesy, this Pepperoni Pizza is loaded with gooey mozzarella and generous slices of pepperoni "
+            "for a bold, savory flavor that never disappoints.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/023/742/417/large_2x/pepperoni-pizza-isolated-illustration-ai-generative-free-png.png",
         price: 30.99,
@@ -145,7 +149,9 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Bean Burrito",
-        description: "Stuffed with beans, rice, salsa",
+        description:
+            "The Bean Burrito is a hearty handheld stuffed with flavorful beans, fluffy rice, and zesty "
+            "salsa—wrapped to perfection for a satisfying bite.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/055/133/581/large_2x/deliciously-grilled-burritos-filled-with-beans-corn-and-fresh-vegetables-served-with-lime-wedge-and-cilantro-isolated-on-transparent-background-free-png.png",
         price: 20.99,
@@ -157,7 +163,9 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "BBQ Bacon Burger",
-        description: "Smoky BBQ sauce, crispy bacon, cheddar",
+        description:
+            "Sink your teeth into smoky bliss with the BBQ Bacon Burger—featuring crispy bacon, tangy BBQ sauce, and sharp "
+            "cheddar layered over a juicy beef pattyr",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/060/236/245/large_2x/a-large-hamburger-with-cheese-onions-and-lettuce-free-png.png",
         price: 27.5,
@@ -169,7 +177,9 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Chicken Caesar Wrap",
-        description: "Grilled chicken, lettuce, Caesar dressing",
+        description:
+            "The Chicken Caesar Wrap is a light yet flavorful option—grilled chicken, crunchy lettuce, and "
+            "creamy Caesar dressing rolled into a soft wrap for a fresh bite.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/048/930/603/large_2x/caesar-wrap-grilled-chicken-isolated-on-transparent-background-free-png.png",
         price: 21.5,
@@ -181,7 +191,9 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Grilled Veggie Sandwich",
-        description: "Roasted veggies, pesto, cheese",
+        description:
+            "Roasted to perfection, the Grilled Veggie Sandwich features vibrant vegetables,"
+            " rich pesto, and melted cheese for a wholesome, satisfying experience.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/047/832/012/large_2x/grilled-sesame-seed-bread-veggie-sandwich-with-tomato-and-onion-free-png.png",
         price: 19.99,
@@ -198,7 +210,9 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Double Patty Burger",
-        description: "Two juicy beef patties and cheese",
+        description:
+            "For serious appetites, the Double Patty Burger stacks two juicy beef patties with gooey cheese for a"
+            " towering bite of bold, meaty flavor.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/060/359/627/large_2x/double-cheeseburger-with-lettuce-tomatoes-cheese-and-sesame-bun-free-png.png",
         price: 32.99,
@@ -216,7 +230,9 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Paneer Tikka Wrap",
-        description: "Spicy paneer, mint chutney, veggies",
+        description:
+            "Bursting with bold spices, the Paneer Tikka Wrap is packed with grilled paneer, crisp veggies, "
+            "and mint chutney—perfectly wrapped for on-the-go flavor.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/057/913/530/large_2x/delicious-wraps-a-tantalizing-array-of-wraps-filled-with-vibrant-vegetables-succulent-fillings-and-fresh-ingredients-artfully-arranged-for-a-mouthwatering-culinary-experience-free-png.png",
         price: 23.99,
@@ -228,7 +244,8 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Mexican Burrito Bowl",
-        description: "Rice, beans, corn, guac, salsa",
+        description:
+            "Dig into a vibrant mix of rice, beans, corn, guacamole, and salsa in our Mexican Burrito Bowl—every spoonful full of color and flavor.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/057/466/374/large_2x/healthy-quinoa-bowl-with-avocado-tomato-and-black-beans-ingredients-free-png.png",
         price: 26.49,
@@ -240,7 +257,8 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Spicy Chicken Sandwich",
-        description: "Crispy chicken, spicy sauce, pickles",
+        description:
+            "Turn up the heat with our Spicy Chicken Sandwich—crispy chicken layered with fiery sauce and tangy pickles for a bold, craveable crunch.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/051/814/008/large_2x/a-grilled-chicken-sandwich-with-lettuce-and-tomatoes-free-png.png",
         price: 24.99,
@@ -258,7 +276,8 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Classic Margherita Pizza",
-        description: "Tomato, mozzarella, fresh basil",
+        description:
+            "Simple yet iconic, the Classic Margherita Pizza combines fresh tomatoes, creamy mozzarella, and fragrant basil on a crisp crust.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/058/700/845/large_2x/free-isolated-on-transparent-background-delicious-pizza-topped-with-fresh-tomatoes-basil-and-melted-cheese-perfect-for-food-free-png.png",
         price: 26.99,
@@ -270,7 +289,8 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Protein Power Bowl",
-        description: "Grilled chicken, quinoa, veggies",
+        description:
+            "Fuel up with the Protein Power Bowl—grilled chicken, quinoa, and garden-fresh veggies come together in a clean, high-protein meal.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/056/106/379/large_2x/top-view-salad-with-chicken-avocado-tomatoes-and-lettuce-free-png.png",
         price: 29.99,
@@ -282,7 +302,8 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Paneer Burrito",
-        description: "Paneer cubes, spicy masala, rice, beans",
+        description:
+            "Spiced just right, the Paneer Burrito features tender paneer, seasoned rice, beans, and masala for a vegetarian delight full of flavor.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/056/565/254/large_2x/burrito-with-cauliflower-and-vegetables-free-png.png",
         price: 24.99,
@@ -294,7 +315,8 @@ class FSearchProvider extends ChangeNotifier {
       ),
       FMenuItem(
         name: "Chicken Club Sandwich",
-        description: "Grilled chicken, lettuce, cheese, tomato",
+        description:
+            "Stacked high with grilled chicken, crisp lettuce, cheese, and ripe tomato, the Chicken Club Sandwich delivers layers of hearty satisfaction.",
         imageUrl:
             "https://static.vecteezy.com/system/resources/previews/060/364/135/large_2x/a-flavorful-club-sandwich-with-turkey-bacon-and-fresh-vegetables-sliced-and-isolated-on-a-transparent-background-free-png.png",
         price: 27.49,
@@ -338,7 +360,7 @@ class FSearchProvider extends ChangeNotifier {
     return categories.firstWhere((category) => category.name == name);
   }
 
-  void setSelectedItem(int index)  {
+  void setSelectedItem(int index) {
     selectedItem = filteredMenus[index];
     notifyListeners();
   }

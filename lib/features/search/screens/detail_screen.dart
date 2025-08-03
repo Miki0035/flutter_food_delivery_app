@@ -188,12 +188,7 @@ class FDetailScreen extends StatelessWidget {
 
                       SizedBox(height: FSize.defaultSpace),
                       // DESCRIPTION
-                      FDescriptionText(
-                        description:
-                            "The Cheeseburger Wendy's Burger is a classic fast food burger that packs a punch of flavor in every bite. "
-                            "Made with a juicy beef patty cooked to perfection, "
-                            "it's topped with melted American cheese, crispy lettuce, tomato, & crunchy pickles.",
-                      ),
+                      FDescriptionText(description: item.description),
 
                       SizedBox(height: FSize.defaultSpace),
 
@@ -267,25 +262,38 @@ class FDetailScreen extends StatelessWidget {
                                               ),
                                             ),
 
-                                         FImageButtonContainer(
-                                                size: 30.0,
-                                                imageSize: 20.0,
+                                            FImageButtonContainer(
+                                              size: 30.0,
+                                              imageSize: 20.0,
 
-                                                imageColor: Colors.white,
-                                                backgroundColor: Colors.red,
-                                                image: item.customizations.contains(custom.name) ? FImage.minus : FImage.plus,
-                                                onTap: () {
-                                                  if (!context.mounted) {
-                                                    return;
-                                                  }
-                                                  if (item.customizations.contains(custom.name)) {
-                                                    provider.removeCustomizationFromItem(item, custom.name);
-                                                  } else {
-                                                    provider.addCustomizationForItem(item, custom.name);
-                                                  }
-                                                },
-                                              ),
-
+                                              imageColor: Colors.white,
+                                              backgroundColor: Colors.red,
+                                              image:
+                                                  item.customizations.contains(
+                                                        custom.name,
+                                                      )
+                                                      ? FImage.minus
+                                                      : FImage.plus,
+                                              onTap: () {
+                                                if (!context.mounted) {
+                                                  return;
+                                                }
+                                                if (item.customizations
+                                                    .contains(custom.name)) {
+                                                  provider
+                                                      .removeCustomizationFromItem(
+                                                        item,
+                                                        custom.name,
+                                                      );
+                                                } else {
+                                                  provider
+                                                      .addCustomizationForItem(
+                                                        item,
+                                                        custom.name,
+                                                      );
+                                                }
+                                              },
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -340,7 +348,6 @@ class FDetailScreen extends StatelessWidget {
                       SizedBox(height: FSize.defaultSpace),
 
                       // SIDE OPTIONS LIST VIEW
-
                       Container(
                         height: MediaQuery.sizeOf(context).height * 0.14,
                         margin: EdgeInsets.symmetric(
@@ -404,15 +411,29 @@ class FDetailScreen extends StatelessWidget {
                                               imageSize: 20.0,
                                               imageColor: Colors.white,
                                               backgroundColor: Colors.red,
-                                              image: item.customizations.contains(custom.name) ? FImage.minus : FImage.plus,
+                                              image:
+                                                  item.customizations.contains(
+                                                        custom.name,
+                                                      )
+                                                      ? FImage.minus
+                                                      : FImage.plus,
                                               onTap: () {
                                                 if (!context.mounted) {
                                                   return;
                                                 }
-                                                if (item.customizations.contains(custom.name)) {
-                                                  provider.removeCustomizationFromItem(item, custom.name);
+                                                if (item.customizations
+                                                    .contains(custom.name)) {
+                                                  provider
+                                                      .removeCustomizationFromItem(
+                                                        item,
+                                                        custom.name,
+                                                      );
                                                 } else {
-                                                  provider.addCustomizationForItem(item, custom.name);
+                                                  provider
+                                                      .addCustomizationForItem(
+                                                        item,
+                                                        custom.name,
+                                                      );
                                                 }
                                               },
                                             ),
